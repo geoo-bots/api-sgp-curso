@@ -67,7 +67,7 @@ public class UsuarioController {
 
 
     
-    @GetMapping(value="/busca", params = "cpf")
+    @GetMapping(value="/buscaPeloCpf")
     public ResponseEntity <Usuario> consultarUsuarioPeloCpf(@RequestParam("cpf") String cpf){
         Optional<Usuario> usuarioExistente = usuarioService.buscarUsuarioPeloCpf(cpf);
 
@@ -78,7 +78,7 @@ public class UsuarioController {
 
     }
 
-    @GetMapping(value="/busca", params = "email")
+    @GetMapping(value="/buscaPeloEmail")
     public ResponseEntity <Usuario> consultarUsuarioPeloEmail(@RequestParam("email") String email){
         Optional<Usuario> usuarioExistente = usuarioService.buscarUsuarioPeloEmail(email);
 
@@ -89,5 +89,3 @@ public class UsuarioController {
 
     }
     }
-
-

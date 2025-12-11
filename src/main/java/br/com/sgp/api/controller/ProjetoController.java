@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.sgp.api.enums.ProjetoStatus;
 import br.com.sgp.api.model.Projeto;
 import br.com.sgp.api.service.ProjetoService;
 
@@ -25,6 +26,11 @@ import br.com.sgp.api.service.ProjetoService;
 public class ProjetoController {
     @Autowired
     private ProjetoService projetoService;
+
+    @GetMapping
+    public ResponseEntity<List<Projeto>> listarProjetos(){
+        return ResponseEntity.ok().body(projetoService.consultarProjetos());
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<Projeto>>buscarProjetoPeloId(@PathVariable ("id") Long id){
@@ -60,8 +66,9 @@ public class ProjetoController {
         }
 
 
-    @GetMapping(value= "/busca", params = "status")
-        public ResponseEntity<List<Projeto>> consultarProjetoPeloStatus(@RequestParam("status") String status){
+        //buscarPorStatus 
+    @GetMapping(value= "/busca")
+        public ResponseEntity<List<Projeto>> consultarProjetoPeloStatus(@RequestParam("status") ProjetoStatus status){
             List<Projeto> projetoExistente = projetoService.filtrarProjetosPeloStatus(status);
             if(projetoExistente.isEmpty()){
                 return ResponseEntity.notFound().build();

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.sgp.api.enums.Prioridade;
+import br.com.sgp.api.enums.TarefaStatus;
 import br.com.sgp.api.model.Tarefa;
 import br.com.sgp.api.service.TarefaService;
 
@@ -83,7 +85,7 @@ public class TarefaController {
 
         //get optional filtrar pelo titulo
 
-        @GetMapping(value="/busca", params = "titulo")
+        @GetMapping(value="/buscaPeloTitulo")
         public ResponseEntity <Tarefa> consultarTarefaPeloTitulo(@RequestParam("titulo") String titulo){
         Optional<Tarefa> tarefaExistente = tarefaService.buscarTarefaPeloTitulo(titulo);
 
@@ -96,8 +98,8 @@ public class TarefaController {
 
     //get com lista 
     //fazer a consulta e depois mandar sem get
-       @GetMapping(value="/busca", params = "status")
-        public ResponseEntity<List<Tarefa>> consultarTarefaPeloStatus(@RequestParam("status") String status){
+       @GetMapping(value="/buscaPeloStatus")
+        public ResponseEntity<List<Tarefa>> consultarTarefaPeloStatus(@RequestParam("status") TarefaStatus status){
         List<Tarefa> tarefaExistente = tarefaService.filtrarTarefaPeloStatus(status);
 
         if(tarefaExistente.isEmpty()){
@@ -109,8 +111,8 @@ public class TarefaController {
     
     //get filtrado pela prioeidade
 
-       @GetMapping(value="/busca", params = "prioridade")
-       public ResponseEntity<List<Tarefa>> consultarTarefaPelaPrioridade(@RequestParam("prioridade") String prioridade){
+       @GetMapping(value="/buscaPelaPrioridade")
+       public ResponseEntity<List<Tarefa>> consultarTarefaPelaPrioridade(@RequestParam("prioridade") Prioridade prioridade){
         List<Tarefa> tarefaExistente = tarefaService.filtrarTarefaPelaPrioridade(prioridade);
         
         if(tarefaExistente.isEmpty()){

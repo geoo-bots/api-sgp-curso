@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.sgp.api.enums.Prioridade;
+import br.com.sgp.api.enums.TarefaStatus;
 import br.com.sgp.api.model.Tarefa;
 import br.com.sgp.api.repository.TarefaRepository;
 
@@ -36,12 +38,12 @@ public class TarefaService {
     }
 
     
-    public List<Tarefa> filtrarTarefaPeloStatus(String status){
+    public List<Tarefa> filtrarTarefaPeloStatus(TarefaStatus status){
         return tarefaRepository.findByStatus(status);
         
     }
     
-    public List<Tarefa> filtrarTarefaPelaPrioridade(String prioridade){
+    public List<Tarefa> filtrarTarefaPelaPrioridade(Prioridade prioridade){
         return tarefaRepository.findByPrioridade(prioridade);
     }
 

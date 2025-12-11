@@ -10,6 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,4 +43,9 @@ public class Projeto {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private ProjetoStatus status;
+
+    //Muitos para um
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario responsavel;
 }
